@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe "Static pages" do
+  describe "Contact page" do
+    
+    it "should have the content 'pk_hunter@sbcglobal.net'" do
+      visit '/static_pages/contact'
+      expect(page).to have_content('pk_hunter@sbcglobal.net')
+    end
+  end
 
   describe "Home page" do
 
