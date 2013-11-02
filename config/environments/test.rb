@@ -11,6 +11,9 @@ SampleApp::Application.configure do
   # just for the purpose of running a single test. If you are using a tool that
   # preloads Rails for running tests, you may have to set it to true.
   config.eager_load = false
+  
+  # Speed up tests by lowering bcrypt's cost function.
+  ActiveModel::SecurePassword.min_cost = true
 
   # Configure static asset server for tests with Cache-Control for performance.
   config.serve_static_assets  = true
