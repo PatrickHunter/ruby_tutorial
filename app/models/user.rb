@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   before_create :create_remember_token
   has_secure_password
   validates :password, length: { minimum: 6 }
+  has_many :microposts, dependent: :destroy
   def User.new_remember_token
     SecureRandom.urlsafe_base64
   end
