@@ -20,6 +20,11 @@ module SessionsHelper
     session[:return_to] = request.url if request.get?
   end
   
+  def signed_in_user
+    store_location
+    redirect_to signin_url, notice: "Please sign in." unless signed_in?
+  end
+  
   def current_user=(user)
     @current_user = user
   end
