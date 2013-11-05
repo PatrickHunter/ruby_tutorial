@@ -13,4 +13,7 @@ FactoryGirl.define do
     content "Lorem ipsum"
     user
   end
+  factory :group do
+    name "Example group"
+  end
 end

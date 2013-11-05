@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
                                    class_name:  "Relationship",
                                    dependent:   :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
+  has_many :memberships, foreign_key: "group_id"
+  has_many :joined_groups, through: :memberships, source: :group
+  
   def following?(other_user)
     relationships.find_by(followed_id: other_user.id)
   end
