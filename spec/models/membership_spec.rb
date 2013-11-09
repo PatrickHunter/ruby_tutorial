@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Membership do
   let(:group) { FactoryGirl.create(:group)}
   let(:member) { FactoryGirl.create(:user) }
-  let(:membership) {Membership.new(member_id: member.id, group_id: group.id)}
-  #let(:membership) { member.memberships.build(group_id: group.id) }
+  #let(:membership) {Membership.new(member_id: member.id, group_id: group.id)}
+  let(:membership) {group.memberships.build(member_id: member.id, group_id: group.id) }
   
   subject { membership }
   

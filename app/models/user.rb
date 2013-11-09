@@ -28,6 +28,19 @@ class User < ActiveRecord::Base
   def unfollow!(other_user)
     relationships.find_by(followed_id: other_user.id).destroy!
   end
+  
+  def join!(group)
+    memberships.create!(group_id: group.id, member_id: self.id)
+  end
+  
+  def member?(group)
+    memberships.find_by(group_id: group.id)
+  end
+  
+  def leave_group!(group)
+    memberships.find_by(group_id: group.id).destroy
+  end
+  
   def User.new_remember_token
     SecureRandom.urlsafe_base64
   end

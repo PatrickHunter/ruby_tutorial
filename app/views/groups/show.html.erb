@@ -1,0 +1,17 @@
+<% provide(:title, @group.name)%>
+<% if @group.members.any?%>
+<h3>Members <%=group.members.count %></h3>
+<ol>
+	<%= render @members%>	
+</ol>
+<%end%>
+<% if signed_in? %>
+<% if @group.members.include?(current_user)%>
+<%= form_for(@group.memberships.destroy(member_id: current_user.id), remote: true) do |f| %>
+  <div><%= f.hidden_field :group_id %></div>
+  <%= f.submit "leave", class: "btn btn-large btn-primary" %>
+<% end %>
+<%else%>
+<% render 'join'%>
+<%end%>
+<%end%>

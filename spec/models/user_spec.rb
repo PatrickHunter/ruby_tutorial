@@ -24,6 +24,7 @@ describe User do
   it { should respond_to(:reverse_relationships) }
   it { should respond_to(:followers) }
   it { should respond_to(:memberships) }
+  it { should respond_to(:joined_groups) }
   
   it { should be_valid }
   it { should_not be_admin }
@@ -48,6 +49,26 @@ describe User do
 
       it { should_not be_following(other_user) }
       its(:followed_users) { should_not include(other_user) }
+    end
+  end
+  
+  describe "join" do
+    let(:group) { FactoryGirl.create(:group)}
+    before do
+      @user.save
+      @user.join!(group)
+    end
+    its(:joined_groups) { should include(group) }
+    
+    describe "and leave" do
+      before { @user.leave_group!(group)}
+      
+      its(:joined_groups) { should_not include(group) }
+    end
+    
+    describe "joined group" do
+      subject { group }
+      its(:members) { should include(@user) }
     end
   end
   

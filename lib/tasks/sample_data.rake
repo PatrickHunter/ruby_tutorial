@@ -4,6 +4,7 @@ namespace :db do
     make_users
     make_microposts
     make_relationships
+    make_groups
   end
 end
 
@@ -39,4 +40,10 @@ def make_relationships
   followers      = users[3..40]
   followed_users.each { |followed| user.follow!(followed) }
   followers.each      { |follower| follower.follow!(user) }
+end
+
+def make_groups
+  users=User.all
+  group=Group.new(description:"test", name:"Autogroup")
+  
 end

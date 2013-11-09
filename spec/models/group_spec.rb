@@ -11,7 +11,7 @@ describe Group do
   
   it { should respond_to(:name)}
   it { should respond_to(:memberships)}
-  
+  it { should respond_to(:description)}
   it "should destroy its memberships when destroyed" do
     memberships = @group.memberships.to_a
     @group.destroy
