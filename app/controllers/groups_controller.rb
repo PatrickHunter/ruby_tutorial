@@ -8,6 +8,7 @@ class GroupsController < ApplicationController
   
   def show
     @group=Group.find(params[:id])  
+    @user=current_user
     @members=@group.members.paginate(page: params[:page])
   end
   
