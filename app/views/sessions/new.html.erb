@@ -9,6 +9,10 @@
 	
 	<%= f.label :password%>
 	<%= f.password_field :password%>
+	<div class="field">
+		<%= label_tag :stay_signed_in %>
+		<%= check_box_tag :stay_signed_in, 1, params[:stay_signed_in]%>
+	</div>
 	
 	<%= f.submit "Sign in", class: "btn btn-large btn-primary"%>
 	<% end %>
