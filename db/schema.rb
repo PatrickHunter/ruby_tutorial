@@ -11,7 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131104052747) do
+ActiveRecord::Schema.define(version: 20131111172038) do
+
+  create_table "groups", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "description"
+  end
+
+  create_table "memberships", force: true do |t|
+    t.integer  "group_id"
+    t.integer  "member_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "memberships", ["group_id"], name: "index_memberships_on_group_id"
+  add_index "memberships", ["member_id", "group_id"], name: "index_memberships_on_member_id_and_group_id", unique: true
+  add_index "memberships", ["member_id"], name: "index_memberships_on_member_id"
 
   create_table "microposts", force: true do |t|
     t.string   "content"
@@ -41,7 +59,9 @@ ActiveRecord::Schema.define(version: 20131104052747) do
     t.string   "password_digest"
     t.string   "rememeber_token"
     t.string   "remember_token"
-    t.boolean  "admin",           default: false
+    t.boolean  "admin",                  default: false
+    t.string   "password_reset_token"
+    t.time     "password_reset_sent_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
